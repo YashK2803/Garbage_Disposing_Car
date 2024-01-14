@@ -1,0 +1,455 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.13395800056145826 0.13865465316693362 0.9812390846479434 1.5552971821092005
+  position -0.9513492040885952 -3.4604775319190098 1.2539063043993095
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+}
+Solid {
+  translation -0.28 -0.51 0.05
+  children [
+    DEF box2 Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0 1
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE box2
+  physics Physics {
+  }
+}
+DEF object Solid {
+  translation -0.272303 -0.156115 0.0295884
+  rotation 0.3988179613513489 0.06451509374797129 -0.9147579113526401 -0.0433553071795858
+  children [
+    DEF box Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.04 0.04 0.04
+      }
+    }
+  ]
+  boundingObject USE box
+  physics Physics {
+  }
+}
+Robot {
+  translation -0.000150043 -0.017643 0.00149568
+  rotation -0.02296217766979558 0.9175554928305895 0.3969441471707006 0.02427051793821187
+  children [
+    DEF us Solid {
+      translation 0 0.1 0.05
+      children [
+        DistanceSensor {
+          rotation 0 0 1 1.57
+          lookupTable [
+            0 0 0
+            1 10000 0
+          ]
+        }
+        DEF us Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "solid(1)"
+    }
+    DEF arm_support Solid {
+      translation -0.04 0 0.11
+      children [
+        DEF sec_arm_mover HingeJoint {
+          jointParameters HingeJointParameters {
+            position 1.0906614461038313e-06
+            axis 0 1 0
+            anchor 0 -0.01 0.04
+          }
+          device [
+            PositionSensor {
+              name "ps_sec_arm"
+            }
+            RotationalMotor {
+              name "sec_arm_mover"
+            }
+          ]
+          endPoint Solid {
+            translation 0 -0.01 0.04
+            rotation 0.9999999999997023 5.457651576745887e-07 -5.453307230518074e-07 1.5700000000002872
+            children [
+              DEF sec_arm Solid {
+                translation -0.06 0 -4.77797e-05
+                rotation 0 1 0 1.57
+                children [
+                  DEF tert_arm Solid {
+                    translation 0 -0.0699204 -0.059944
+                    rotation 1 0 0 1.57
+                    children [
+                      DEF pick_plate Solid {
+                        translation 0 -0.09 0.075
+                        children [
+                          DEF mover HingeJoint {
+                            jointParameters HingeJointParameters {
+                              position -0.8638814192667947
+                              axis 0 0 1
+                              anchor -0.1 -0.1 -0.07
+                            }
+                            device [
+                              DEF ps PositionSensor {
+                                name "ps"
+                              }
+                              DEF motor RotationalMotor {
+                                name "motor"
+                              }
+                            ]
+                            endPoint Solid {
+                              translation -0.1 -0.1 -0.07
+                              rotation 0 0 -0.9999999999999999 0.8638814192667945
+                              children [
+                                DEF slider Solid {
+                                  translation -0.070711 -0.0707501 -0.049944
+                                  rotation -0.28098201654632904 0.6788900399781385 0.6783490399462804 -2.5933453071795864
+                                  children [
+                                    DEF us2 Solid {
+                                      translation -0.07 0.09 0
+                                      children [
+                                        DistanceSensor {
+                                          rotation 0 1 0 -1.57
+                                          name "ds2"
+                                        }
+                                        Shape {
+                                          appearance PBRAppearance {
+                                            baseColor 0 0 1
+                                            roughness 1
+                                            metalness 0
+                                          }
+                                          geometry Box {
+                                            size 0.01 0.01 0.01
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    DEF plate Shape {
+                                      appearance PBRAppearance {
+                                        baseColor 0 1 1
+                                        roughness 1
+                                        metalness 0
+                                      }
+                                      geometry Box {
+                                        size 0.2 0.2 1e-05
+                                      }
+                                    }
+                                  ]
+                                  boundingObject DEF plate Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 1 1
+                                      roughness 1
+                                      metalness 0
+                                    }
+                                    geometry Box {
+                                      size 0.2 0.2 1e-05
+                                    }
+                                  }
+                                  physics Physics {
+                                  }
+                                }
+                                DEF mover Shape {
+                                  appearance PBRAppearance {
+                                    baseColor 0 0 0
+                                    roughness 1
+                                    metalness 0
+                                  }
+                                  geometry Cylinder {
+                                    height 0.15
+                                    radius 0.004
+                                  }
+                                }
+                              ]
+                              boundingObject USE mover
+                              physics Physics {
+                              }
+                            }
+                          }
+                          DEF pick_plate Shape {
+                            appearance PBRAppearance {
+                              baseColor 0 1 1
+                              metalness 0
+                            }
+                            geometry Box {
+                              size 0.2 0.2 1e-10
+                            }
+                          }
+                        ]
+                        boundingObject USE pick_plate
+                        physics Physics {
+                        }
+                      }
+                      DEF tertarm Shape {
+                        appearance PBRAppearance {
+                          baseColor 0 1 1
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry Box {
+                          size 0.01 0.01 0.15
+                        }
+                      }
+                    ]
+                    boundingObject USE tertarm
+                    physics Physics {
+                    }
+                  }
+                  DEF sec_arm Shape {
+                    appearance PBRAppearance {
+                      baseColor 0 1 1
+                      roughness 1
+                      metalness 0
+                    }
+                    geometry Box {
+                      size 0.01 0.01 0.12
+                    }
+                  }
+                ]
+                boundingObject DEF mover Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0 0
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    height 0.01
+                    radius 0.004
+                  }
+                }
+                physics Physics {
+                }
+              }
+              DEF base_mover Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.004
+                }
+              }
+            ]
+            boundingObject USE base_mover
+            physics Physics {
+            }
+          }
+        }
+        DEF arm_support Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.015 0.015 0.1
+          }
+        }
+      ]
+      boundingObject USE arm_support
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 7.96323e-06 0.07 0.05
+      rotation 0 1 0 1.57
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position 8.19502567978151
+            axis 0 0 1
+            anchor 0 0 -0.08
+          }
+          device [
+            RotationalMotor {
+              name "back_wheel_2"
+            }
+          ]
+          endPoint Solid {
+            translation 0 0 -0.08
+            rotation 0 0 -1 4.371344934577662
+            children [
+              DEF wheel Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.0125
+                  radius 0.04
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position 8.190958785530656
+            axis 0 0 1
+            anchor 0 0 0.08
+          }
+          device [
+            RotationalMotor {
+              name "back_wheel_1"
+            }
+          ]
+          endPoint DEF wheel Solid {
+            translation 0 0 0.08
+            rotation 0 0 -1 4.375411828828517
+            children [
+              DEF wheel Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.0125
+                  radius 0.04
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+        DEF axle Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.15
+            radius 0.01
+          }
+        }
+      ]
+      name "back_axle"
+      boundingObject USE axle
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 7.96323e-06 -0.07 0.05
+      rotation 0 1 0 1.57
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position 1.1415308950947687e-12
+            axis 0 0 1
+            anchor 0 0 -0.08
+          }
+          device [
+            RotationalMotor {
+              name "front_wheel_2"
+            }
+          ]
+          endPoint Solid {
+            translation 0 0 -0.08
+            children [
+              USE wheel
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position 4.5464451919070156e-07
+            axis 0 0 1
+            anchor 0 0 0.08
+          }
+          device [
+            RotationalMotor {
+              name "front_wheel_1"
+            }
+          ]
+          endPoint Solid {
+            translation 0 0 0.08
+            rotation 0 0 0.9999999999999999 4.5491270787935796e-07
+            children [
+              USE wheel
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+        DEF axle Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+          }
+          geometry Cylinder {
+            height 0.15
+            radius 0.01
+          }
+        }
+      ]
+      name "front_axle"
+      boundingObject USE axle
+      physics Physics {
+      }
+    }
+    DEF base Pose {
+      translation 0 0 0.05
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.1 0.2 0.02
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject USE base
+  physics Physics {
+    density 100000
+  }
+  controller "arm_car"
+}
